@@ -1,4 +1,4 @@
-import Card from "../UI/Cars"
+import Card from "../UI/Card"
 
 const MealsSummary = (props) => {
   return (

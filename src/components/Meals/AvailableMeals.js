@@ -1,4 +1,4 @@
-import Card from "../UI/Cars";
+import Card from "../UI/Card";
 import MealItem from "./MealItem";
 
 const DUMMY_MEALS = [

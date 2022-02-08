@@ -12,7 +12,10 @@ const MealItemForm = (props) => {
           step: '1',
         }}
       />
-      <button className="cursor-pointer ml-3 py-3 px-8 bold rounded-3xl bg-charleston-green text-alice-blue transition ease-in-out duration-200 hover:brightness-150">
+      <button
+        className="cursor-pointer ml-3 py-3 px-8 bold rounded-3xl bg-charleston-green text-alice-blue transition ease-in-out duration-200 hover:brightness-150"
+        type="submit"
+      >
         Add
       </button>
     </form>
