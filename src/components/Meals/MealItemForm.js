@@ -1,20 +1,34 @@
-import React, { useContext } from "react"
+import React, { useRef, useState } from "react"
 import Input from "../UI/Input"
-import CartContext from "../../store/cart-context"
 
 
 const MealItemForm = (props) => {
-  const ctx = useContext(CartContext)
+  const [formIsValid, setFormIsValid] = useState(true)
+  const mealInput = useRef()
+
+  const checkForm = () => {
+    const isValid = (
+      mealInput.current.value.trim().length &&
+      +mealInput.current.value > 1 &&
+      +mealInput.current.value < 5
+    )
+    setFormIsValid(isValid)
+  }
   
   const addMeal = (event) => {
     event.preventDefault()
-    console.log(event)
-    ctx.addItem(event.target.value)
+    checkForm()
+
+    if (!formIsValid) return
+
+    props.onAddMeal(+mealInput.current.value)
+    mealInput.current.value = 0
   }
 
   return (
     <form className="flex items-center justify-end" onSubmit={addMeal}>
       <Input
+        ref={mealInput}
         label="Amount"
         input={{
           id: 'amount_' + props.id,

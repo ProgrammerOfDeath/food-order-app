@@ -14,12 +14,24 @@ const defaultState = {
 
 const cartReducer = (state, action) => {
   if (action.type === ACTION_TYPES.ADD) {
-    const updatedItems = [...state.items, action.value]
-    const updatedAmount = state.totalAmount + (action.value.price * action.value.amount)
-
+    console.log('here', action.value)
+    let updatedItems = []
+    let updatedAmount = 0
+    if (!state.items.includes(action.value)) {
+      updatedItems = [...state.items, action.value]
+      updatedAmount = state.totalAmount + (action.value.price * action.value.amount)
+    } else {
+      // adjust amount of existing item in cart
+      updatedItems = state.items.map(item => {
+        if (item.id === action.value.id) {
+          item.amount++
+        }
+        return item 
+      })
+    }
     return {
       items: updatedItems,
-      totalAmount: updatedAmount
+      totalAmount: updatedAmount,
     }
   }
   
