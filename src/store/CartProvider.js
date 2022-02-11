@@ -14,7 +14,6 @@ const defaultState = {
 
 const cartReducer = (state, action) => {
   if (action.type === ACTION_TYPES.ADD) {
-    console.log('here', action.value)
     let updatedItems = []
     let updatedAmount = 0
     if (!state.items.includes(action.value)) {
@@ -31,7 +30,17 @@ const cartReducer = (state, action) => {
     }
     return {
       items: updatedItems,
-      totalAmount: updatedAmount,
+      totalAmount: updatedAmount
+    }
+  }
+
+  if (action.type === ACTION_TYPES.REMOVE) {
+    let updatedItems = state.items.filter(item => item.id !== action.value.id)
+    let updatedAmount = state.totalAmount - (action.value.price * action.value.amount)
+
+    return {
+      items: updatedItems,
+      totalAmount: updatedAmount
     }
   }
   
