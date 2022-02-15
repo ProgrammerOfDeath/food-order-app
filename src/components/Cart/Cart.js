@@ -9,8 +9,8 @@ const Cart = (props) => {
 
   const cartItems = (
     <ul className="list-none m-0 p-0 overflow-y-scroll max-h-80">
-      {cartCtx.items.map((item) => (
-        <CartItem name={item.name} price={item.price} amount={item.amount} id={item.id} />
+      {cartCtx.items.map((item, key) => (
+        <CartItem name={item.name} price={item.price} amount={item.amount} key={key} />
       ))}
     </ul>
   )
