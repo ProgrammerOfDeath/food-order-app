@@ -16,18 +16,17 @@ const cartReducer = (state, action) => {
   if (action.type === ACTION_TYPES.ADD) {
     let updatedItems = []
     let updatedAmount = 0
-    if (!state.items.includes(action.value)) {
-      updatedItems = [...state.items, action.value]
-      updatedAmount = state.totalAmount + (action.value.price * action.value.amount)
+
+    let existingItem = state.items.find((item) => item.id === action.value.id)
+
+    if (existingItem) {
+      existingItem.amount += action.value.amount
+      updatedItems = [...state.items]
+      updatedItems[updatedItems.indexOf(existingItem)] = existingItem
     } else {
-      // adjust amount of existing item in cart
-      updatedItems = state.items.map(item => {
-        if (item.id === action.value.id) {
-          item.amount++
-        }
-        return item 
-      })
+      updatedItems = [...state.items, action.value]
     }
+    updatedAmount = state.totalAmount + (action.value.price * action.value.amount)
     return {
       items: updatedItems,
       totalAmount: updatedAmount
