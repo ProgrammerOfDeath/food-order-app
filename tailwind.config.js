@@ -15,7 +15,11 @@ module.exports = {
         },
         'slide-in': {
           '0%': { transform: 'translateY(20rem)' },
-          '100%': { transform: 'translateY(0)' }
+          '100%': { transform: 'translateY(0)' },
+        },
+        drive: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(-45deg)' },
         },
         bump: {
           '0%': { transform: 'scaleX(1) scaleY(1)' },
@@ -28,7 +32,8 @@ module.exports = {
       animation: {
         slide: 'slide .3s ease-in',
         bump: 'bump .3s ease-out',
-        'slide-in': 'slide-in .3s linear'
+        'slide-in': 'slide-in .3s linear',
+        drive: 'drive .3s cubic-bezier(0.4, 0, 0.6, 1) 1',
       },
     },
   },
