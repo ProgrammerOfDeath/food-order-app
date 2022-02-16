@@ -14,12 +14,14 @@ const cartItem = props => {
         <button
           className="w-12 font-bold text-lg bg-transparent border border-solid border-charleston-green ml-4 rounded-md text-center hover:bg-charleston-green transition-colors duration-100 ease-in-out hover:text-alice-blue"
           type="button"
+          onClick={props.onRemove}
         >
           -
         </button>
         <button
           className="w-12 font-bold text-lg bg-transparent border border-solid border-charleston-green ml-4 rounded-md text-center hover:bg-charleston-green transition-colors duration-100 ease-in-out hover:text-alice-blue"
           type="button"
+          onClick={props.onAdd}
         >
           +
         </button>

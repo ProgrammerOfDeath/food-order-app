@@ -34,8 +34,19 @@ const cartReducer = (state, action) => {
   }
 
   if (action.type === ACTION_TYPES.REMOVE) {
-    let updatedItems = state.items.filter(item => item.id !== action.value.id)
-    let updatedAmount = state.totalAmount - (action.value.price * action.value.amount)
+    let existingItem = state.items.find(item => item.id === action.value)
+    let updatedItems = []
+    if (existingItem.amount === 1) {
+      updatedItems = state.items.filter(item => item.id !== existingItem.id)
+    } else {
+      updatedItems = state.items.map(item => {
+        if (item.id === existingItem.id) {
+          item.amount--
+        }
+        return item
+      })
+    }
+    let updatedAmount = state.totalAmount - (existingItem.price)
 
     return {
       items: updatedItems,
@@ -53,8 +64,8 @@ const CartProvider = props => {
     dispatchCartAction({ type: ACTION_TYPES.ADD, value: item })
   }
 
-  const removeItemHandler = (item) => {
-    dispatchCartAction({ type: ACTION_TYPES.REMOVE, value: item })
+  const removeItemHandler = (id) => {
+    dispatchCartAction({ type: ACTION_TYPES.REMOVE, value: id })
   }
 
   const cartContext = {
