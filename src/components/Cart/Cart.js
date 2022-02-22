@@ -15,6 +15,10 @@ const Cart = (props) => {
     cartCtx.removeItem(id)
   }
 
+  const onDeleteHandler = (id) => {
+    cartCtx.deleteItem(id)
+  }
+
   const cartItems = (
     <ul className="list-none m-0 p-0 overflow-y-scroll max-h-80">
       {cartCtx.items.map((item, key) => (
@@ -25,6 +29,7 @@ const Cart = (props) => {
           key={key}
           onAdd={onAddHandler.bind(null, item)}
           onRemove={onRemoveHandler.bind(null, item.id)}
+          onDelete={onDeleteHandler.bind(null, item.id)}
         />
       ))}
     </ul>

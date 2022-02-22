@@ -4,7 +4,8 @@ import { useReducer } from "react"
 // action types handled in cart reducer
 const ACTION_TYPES = {
   ADD: 'ADD',
-  REMOVE: 'REMOVE'
+  REMOVE: 'REMOVE',
+  DELETE: 'DELETE'
 }
 
 const defaultState = {
@@ -13,6 +14,7 @@ const defaultState = {
 }
 
 const cartReducer = (state, action) => {
+  /* ADD ONE ITEM */
   if (action.type === ACTION_TYPES.ADD) {
     let updatedItems = []
     let updatedAmount = 0
@@ -33,6 +35,7 @@ const cartReducer = (state, action) => {
     }
   }
 
+  /* REMOVE ONE ITEM */
   if (action.type === ACTION_TYPES.REMOVE) {
     let existingItem = state.items.find(item => item.id === action.value)
     let updatedItems = []
@@ -53,6 +56,18 @@ const cartReducer = (state, action) => {
       totalAmount: updatedAmount
     }
   }
+
+  /* DELETE ITEM */
+  if (action.type === ACTION_TYPES.DELETE) {
+    let existingItem = state.items.find(item => item.id === action.value)
+    let updatedItems = state.items.filter(item => item.id !== action.value)
+    let updatedTotalAmount = state.totalAmount - existingItem.price
+
+    return {
+      items: updatedItems,
+      totalAmount: updatedTotalAmount
+    }
+  }
   
   return defaultState
 }
@@ -68,11 +83,16 @@ const CartProvider = props => {
     dispatchCartAction({ type: ACTION_TYPES.REMOVE, value: id })
   }
 
+  const deleteItemHandler = (id) => {
+    dispatchCartAction({ type: ACTION_TYPES.DELETE, value: id })
+  }
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemHandler,
-    removeItem: removeItemHandler
+    removeItem: removeItemHandler,
+    deleteItem: deleteItemHandler
   }
 
   return (
