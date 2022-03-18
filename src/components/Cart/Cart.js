@@ -7,10 +7,30 @@ import CartItem from "./CartItem";
 const Cart = (props) => {
   const cartCtx = useContext(CartContext)
 
+  const onAddHandler = (item) => {
+    cartCtx.addItem({...item, amount: 1})
+  }
+
+  const onRemoveHandler = (id) => {
+    cartCtx.removeItem(id)
+  }
+
+  const onDeleteHandler = (id) => {
+    cartCtx.deleteItem(id)
+  }
+
   const cartItems = (
     <ul className="list-none m-0 p-0 overflow-y-scroll max-h-80">
       {cartCtx.items.map((item, key) => (
-        <CartItem name={item.name} price={item.price} amount={item.amount} key={key} />
+        <CartItem
+          name={item.name}
+          price={item.price}
+          amount={item.amount}
+          key={key}
+          onAdd={onAddHandler.bind(null, item)}
+          onRemove={onRemoveHandler.bind(null, item.id)}
+          onDelete={onDeleteHandler.bind(null, item.id)}
+        />
       ))}
     </ul>
   )

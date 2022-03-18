@@ -1,3 +1,6 @@
+import React from "react"
+import { FaTrashAlt } from "react-icons/fa";
+
 const cartItem = props => {
   return (
     <li
@@ -10,16 +13,22 @@ const cartItem = props => {
           <span className="ml-5 p-1 border solid border-charleston-green rounded-md"> x {props.amount}</span>
         </div>
       </div>
-      <div className="flex flex-row">
+      <div className="flex flex-row items-center">
+        {/* DELETE */}
+        <FaTrashAlt className="w-12 hover:text-red-500 hover:cursor-pointer" onClick={props.onDelete}/>
+        {/* REMOVE */}
         <button
           className="w-12 font-bold text-lg bg-transparent border border-solid border-charleston-green ml-4 rounded-md text-center hover:bg-charleston-green transition-colors duration-100 ease-in-out hover:text-alice-blue"
           type="button"
+          onClick={props.onRemove}
         >
           -
         </button>
+        {/* ADD */}
         <button
           className="w-12 font-bold text-lg bg-transparent border border-solid border-charleston-green ml-4 rounded-md text-center hover:bg-charleston-green transition-colors duration-100 ease-in-out hover:text-alice-blue"
           type="button"
+          onClick={props.onAdd}
         >
           +
         </button>

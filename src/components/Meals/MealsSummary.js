@@ -6,8 +6,7 @@ const MealsSummary = (props) => {
       <Card className="text-center max-w-5xl m-auto w-11/12 relative -mt-24 text-lg">
         <h2 className="text-4xl mb-3">Delicious Food, Delivered To You</h2>
         <p>
-          Choose your favorite meal from our broad selection of available meals
-          and enjoy a delicious lunch or dinner at home.
+          Ich teste hier nur mal eben was, you know.
         </p>
         <p>
           All our meals are cooked with high-quality ingredients, just-in-time and
